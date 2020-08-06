@@ -41,4 +41,15 @@ class TodoListApplicationTests {
 
 		assertEquals(todoRequest.getContent(),todoResponse.getContent());
 	}
+
+
+	@Test
+	void should_return_true_when_deletetodo_given_id() {
+		Integer id = 1;
+
+		Boolean result = todoService.deleteTodo(id);
+
+		assertEquals(true, result);
+
+	}
 }

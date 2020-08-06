@@ -17,6 +17,10 @@ public class TodoService {
     @Autowired
     TodoRepository todoRepository;
 
+    public Boolean deleteTodo(Integer id) {
+        return null;
+    }
+
 
     public TodoResponse addTodo(TodoRequest todoRequest) {
         Todo todo = new Todo();
