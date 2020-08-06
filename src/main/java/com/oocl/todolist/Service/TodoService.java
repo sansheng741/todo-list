@@ -1,5 +1,7 @@
 package com.oocl.todolist.Service;
 
+import com.oocl.todolist.Dto.TodoRequest;
+import com.oocl.todolist.Dto.TodoResponse;
 import org.springframework.stereotype.Service;
 
 /**
@@ -7,4 +9,7 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class TodoService {
+    public TodoResponse addTodo(TodoRequest todoRequest) {
+        return null;
+    }
 }
