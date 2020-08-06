@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Created by CHENCO9 on 8/6/2020 8:04 PM
@@ -42,7 +43,18 @@ public class TodoService {
     }
 
 
-    public List<Todo> queryAll() {
-        return  todoRepository.findAll();
+    public List<TodoResponse> queryAll() {
+        List<Todo> todoList = todoRepository.findAll();
+        List<TodoResponse> todoResponseList = todoList.stream().map((todo) -> {
+            TodoResponse todoResponse = new TodoResponse();
+            BeanUtils.copyProperties(todo,todoResponse);
+            return todoResponse;
+        }).collect(Collectors.toList());
+        return  todoResponseList;
+    }
+
+    public List<TodoResponse> queryFinishList() {
+
+        return  null;
     }
 }

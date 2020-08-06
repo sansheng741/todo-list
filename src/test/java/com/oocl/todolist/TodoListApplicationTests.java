@@ -64,12 +64,38 @@ class TodoListApplicationTests {
 		todo.setId(1);
 		todo.setContent("hello world");
 		todoList.add(todo);
-		TodoResponse todoResponse = new TodoResponse();
-		BeanUtils.copyProperties(todo, todoResponse);
+
+//		TodoResponse todoResponse = new TodoResponse();
+//		BeanUtils.copyProperties(todo, todoResponse);
+
 		Mockito.when(todoRepository.findAll()).thenReturn(todoList);
 
-		List<Todo> todoListResult = todoService.queryAll();
+		List<TodoResponse> todoListResult = todoService.queryAll();
 
 		assertEquals(1, todoListResult.size());
+	}
+
+	@Test
+	void should_return_finish_todo_list_when_query_finish_list_given_void() {
+
+		List<Todo> todoList = new ArrayList<>();
+		Todo todoFinish = new Todo();
+		todoFinish.setId(1);
+		todoFinish.setContent("hello world");
+		todoFinish.setStatus(true);
+
+		Todo todoNotFinish = new Todo();
+		todoNotFinish.setId(2);
+		todoNotFinish.setContent("hello world");
+		todoNotFinish.setStatus(false);
+		todoList.add(todoNotFinish);
+
+		Mockito.when(todoRepository.getTodoByStatus(true)).thenReturn(todoList);
+
+		List<TodoResponse> todoListResult = todoService.queryFinishList();
+
+		assertEquals(1, todoListResult.size());
+
+
 	}
 }
