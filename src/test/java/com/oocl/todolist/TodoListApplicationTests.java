@@ -13,9 +13,7 @@ import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 
 @SpringBootTest
@@ -34,12 +32,13 @@ class TodoListApplicationTests {
 		todoRequest.setContent("hello world");
 		todoRequest.setStatus(false);
 
-		Mockito.when(todoRepository.save(any())).thenReturn(new Todo());
+		Todo todo = new Todo();
+		todo.setContent("hello world");
+		todo.setStatus(false);
+		Mockito.when(todoRepository.save(any())).thenReturn(todo);
 
 		TodoResponse todoResponse = todoService.addTodo(todoRequest);
 
-		List<Todo> todoList = todoRepository.findAll();
-
-		assertEquals(1,todoList.size());
+		assertEquals(todoRequest.getContent(),todoResponse.getContent());
 	}
 }
