@@ -1,6 +1,5 @@
 package com.oocl.todolist.integrationTest;
 
-import com.oocl.todolist.Dto.TodoRequest;
 import com.oocl.todolist.Entity.Todo;
 import com.oocl.todolist.Repository.TodoRepository;
 import org.junit.jupiter.api.Test;
@@ -66,9 +65,27 @@ public class TodoIntegrationTest {
 
         Todo todoSave = todoRepository.save(todo);
 
-        mockMvc.perform(MockMvcRequestBuilders.delete("/todos/"+todoSave.getId()))
+        mockMvc.perform(MockMvcRequestBuilders.delete("/todos/" + todoSave.getId()))
                 .andExpect(status().isOk());
 
-        assertEquals(0,todoRepository.findAll().size());
+        assertEquals(0, todoRepository.findAll().size());
+    }
+
+    @Test
+    void should_return_status_true_when_updateTodoStatus_given_id_todo_request() throws Exception {
+        Todo todo = new Todo();
+        todo.setContent("hello world");
+        todo.setStatus(false);
+        Todo todoSave = todoRepository.save(todo);
+
+
+        String todoRequest = "{ \"content\" : \"hello world\",\n" +
+                "    \"status\" : true}";
+
+        mockMvc.perform(MockMvcRequestBuilders.put("/todos/" + todoSave.getId()).contentType(MediaType.APPLICATION_JSON)
+                .content(todoRequest))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("status").value(true));
+
     }
 }
