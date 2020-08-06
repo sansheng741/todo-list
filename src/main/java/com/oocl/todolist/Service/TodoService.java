@@ -54,7 +54,13 @@ public class TodoService {
     }
 
     public List<TodoResponse> queryFinishList() {
+        List<Todo> todoByStatus = todoRepository.getTodoByStatus(true);
 
-        return  null;
+        List<TodoResponse> todoResponseList = todoByStatus.stream().map((todo) -> {
+            TodoResponse todoResponse = new TodoResponse();
+            BeanUtils.copyProperties(todo,todoResponse);
+            return todoResponse;
+        }).collect(Collectors.toList());
+        return  todoResponseList;
     }
 }
