@@ -65,6 +65,15 @@ public class TodoService {
     }
 
     public TodoResponse updateTodoStatus(Integer id, TodoRequest todoRequest) {
-        return null;
+        Todo todo = new Todo();
+        todo.setId(id);
+        BeanUtils.copyProperties(todoRequest,todo);
+
+        Todo saveUpdate = todoRepository.save(todo);
+
+        TodoResponse todoResponse = new TodoResponse();
+        BeanUtils.copyProperties(saveUpdate,todoResponse);
+
+        return todoResponse;
     }
 }

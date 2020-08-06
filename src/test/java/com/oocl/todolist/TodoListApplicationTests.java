@@ -99,16 +99,14 @@ class TodoListApplicationTests {
     void should_return_todo_response_when_update_status_given_id_and_todo_request() {
         Todo todo = new Todo();
         todo.setContent("hello world");
-        todo.setStatus(false);
-
-        todoRepository.save(todo);
+        todo.setStatus(true);
 
         TodoRequest todoRequest = new TodoRequest();
-        todoRequest.setStatus(true);
+        todoRequest.setStatus(false);
         todoRequest.setContent("hello world");
 
+        Mockito.when(todoRepository.save(any())).thenReturn(todo);
         TodoResponse todoResponse = todoService.updateTodoStatus(1, todoRequest);
-
         assertTrue(todoResponse.isStatus());
 
     }
