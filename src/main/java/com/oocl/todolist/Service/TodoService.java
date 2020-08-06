@@ -18,7 +18,12 @@ public class TodoService {
     TodoRepository todoRepository;
 
     public Boolean deleteTodo(Integer id) {
-        return null;
+        try {
+            todoRepository.deleteById(id);
+            return true;
+        }catch (Exception e){
+            return false;
+        }
     }
 
 
