@@ -43,7 +43,6 @@ public class TodoService {
 
 
     public List<Todo> queryAll() {
-        List<Todo> todoList = new ArrayList<>();
-        return  todoList;
+        return  todoRepository.findAll();
     }
 }
