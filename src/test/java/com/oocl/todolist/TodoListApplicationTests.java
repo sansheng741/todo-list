@@ -17,6 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
 
 @SpringBootTest
@@ -91,6 +92,24 @@ class TodoListApplicationTests {
         List<TodoResponse> todoListResult = todoService.queryFinishList();
 
         assertEquals(1, todoListResult.size());
+
+    }
+
+    @Test
+    void should_return_todo_response_when_update_status_given_id_and_todo_request() {
+        Todo todo = new Todo();
+        todo.setContent("hello world");
+        todo.setStatus(false);
+
+        todoRepository.save(todo);
+
+        TodoRequest todoRequest = new TodoRequest();
+        todoRequest.setStatus(true);
+        todoRequest.setContent("hello world");
+
+        TodoResponse todoResponse = todoService.updateTodoStatus(1, todoRequest);
+
+        assertTrue(todoResponse.isStatus());
 
     }
 }

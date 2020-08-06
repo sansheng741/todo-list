@@ -63,4 +63,8 @@ public class TodoService {
         }).collect(Collectors.toList());
         return  todoResponseList;
     }
+
+    public TodoResponse updateTodoStatus(Integer id, TodoRequest todoRequest) {
+        return null;
+    }
 }

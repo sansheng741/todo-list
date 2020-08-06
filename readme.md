@@ -19,9 +19,9 @@ when queryFinishTodo
 then finishTodoList  
 
 updateStatus  
-given id todo(status true)  
+given id todo(status false)  
 when updateStatus  
-then todo(status false) 
+then todo(status true) 
 
 
 
