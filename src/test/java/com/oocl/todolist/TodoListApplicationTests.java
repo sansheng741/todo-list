@@ -11,7 +11,11 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.beans.BeanUtils;
 import org.springframework.boot.test.context.SpringBootTest;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
@@ -51,5 +55,21 @@ class TodoListApplicationTests {
 
 		assertEquals(true, result);
 
+	}
+
+	@Test
+	void should_return_todolist_when_query_all() {
+		List<Todo> todoList = new ArrayList<>();
+		Todo todo = new Todo();
+		todo.setId(1);
+		todo.setContent("hello world");
+		todoList.add(todo);
+		TodoResponse todoResponse = new TodoResponse();
+		BeanUtils.copyProperties(todo, todoResponse);
+		Mockito.when(todoRepository.findAll()).thenReturn(todoList);
+
+		List<Todo> todoListResult = todoService.queryAll();
+
+		assertEquals(1, todoListResult.size());
 	}
 }

@@ -8,6 +8,9 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by CHENCO9 on 8/6/2020 8:04 PM
  */
@@ -36,5 +39,11 @@ public class TodoService {
         BeanUtils.copyProperties(saveTodo,todoResponse);
 
         return todoResponse;
+    }
+
+
+    public List<Todo> queryAll() {
+        List<Todo> todoList = new ArrayList<>();
+        return  todoList;
     }
 }
