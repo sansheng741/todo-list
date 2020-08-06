@@ -1,11 +1,13 @@
 package com.oocl.todolist.integrationTest;
 
+import com.oocl.todolist.Dto.TodoRequest;
 import com.oocl.todolist.Entity.Todo;
 import com.oocl.todolist.Repository.TodoRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
@@ -26,7 +28,6 @@ public class TodoIntegrationTest {
     MockMvc mockMvc;
 
 
-
     @Test
     void should_return_all_todo_list_when_get_all_todo_given_void() throws Exception {
         Todo todo = new Todo();
@@ -38,5 +39,21 @@ public class TodoIntegrationTest {
         mockMvc.perform(MockMvcRequestBuilders.get("/todos"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("length()").value(1));
+    }
+
+    @Test
+    void should_return_todo_response_when_add_todo_given_todo_request() throws Exception {
+
+        String todoRequest = "{\n" +
+                "    \"content\" : \"hello world\",\n" +
+                "    \"status\" : false\n" +
+                "}";
+
+
+        mockMvc.perform(MockMvcRequestBuilders.post("/todos").contentType(MediaType.APPLICATION_JSON)
+                .content(todoRequest))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("content").value("hello world"))
+                .andExpect(jsonPath("status").value(false));
     }
 }
