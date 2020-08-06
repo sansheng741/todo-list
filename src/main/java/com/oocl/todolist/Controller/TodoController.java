@@ -28,7 +28,10 @@ public class TodoController {
         return todoService.addTodo(todoRequest);
     }
 
-
+    @DeleteMapping("/{id}")
+    public Boolean deleteTodo(@PathVariable("id") Integer id){
+        return todoService.deleteTodo(id);
+    }
 
 
 
