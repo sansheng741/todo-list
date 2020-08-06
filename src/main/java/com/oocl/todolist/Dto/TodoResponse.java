@@ -1,26 +1,21 @@
-package com.oocl.todolist.Entity;
+package com.oocl.todolist.Dto;
 
-import javax.persistence.*;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
 
 /**
- * Created by CHENCO9 on 8/6/2020 7:51 PM
- * @author CHENCO9
+ * Created by CHENCO9 on 8/6/2020 8:01 PM
  */
-@Entity
-@Table(name = "todo")
-public class Todo {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class TodoResponse {
     private Integer id;
 
-    @NotNull
     private String content;
-    @NotNull
     private boolean status;
 
 
-    public Todo() {
+    public TodoResponse() {
     }
 
     public Integer getId() {
