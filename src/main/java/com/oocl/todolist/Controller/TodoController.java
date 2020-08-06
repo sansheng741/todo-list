@@ -1,12 +1,10 @@
 package com.oocl.todolist.Controller;
 
+import com.oocl.todolist.Dto.TodoRequest;
 import com.oocl.todolist.Dto.TodoResponse;
 import com.oocl.todolist.Service.TodoService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -24,6 +22,12 @@ public class TodoController {
     public List<TodoResponse> queryAll(){
         return todoService.queryAll();
     }
+
+    @PostMapping
+    public TodoResponse addTodo(@RequestBody TodoRequest todoRequest){
+        return todoService.addTodo(todoRequest);
+    }
+
 
 
 
