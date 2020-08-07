@@ -2,6 +2,7 @@ package com.oocl.todolist;
 
 import com.oocl.todolist.Dto.TodoRequest;
 import com.oocl.todolist.Dto.TodoResponse;
+import com.oocl.todolist.Dto.TodoUpdateRequest;
 import com.oocl.todolist.Entity.Todo;
 import com.oocl.todolist.Repository.TodoRepository;
 import com.oocl.todolist.Service.TodoService;
@@ -101,12 +102,12 @@ class TodoListApplicationTests {
         todo.setContent("hello world");
         todo.setStatus(true);
 
-        TodoRequest todoRequest = new TodoRequest();
-        todoRequest.setStatus(false);
-        todoRequest.setContent("hello world");
+        TodoUpdateRequest todoUpdateRequest = new TodoUpdateRequest();
+        todoUpdateRequest.setStatus(false);
+
 
         Mockito.when(todoRepository.save(any())).thenReturn(todo);
-        TodoResponse todoResponse = todoService.updateTodoStatus(1, todoRequest);
+        TodoResponse todoResponse = todoService.updateTodoStatus(1, todoUpdateRequest);
         assertTrue(todoResponse.isStatus());
 
     }

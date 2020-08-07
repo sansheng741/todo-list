@@ -79,11 +79,12 @@ public class TodoIntegrationTest {
         Todo todoSave = todoRepository.save(todo);
 
 
-        String todoRequest = "{ \"content\" : \"hello world\",\n" +
-                "    \"status\" : true}";
+        String todoUpdateRequest = "{\n" +
+                "    \"status\" : true\n" +
+                "}";
 
         mockMvc.perform(MockMvcRequestBuilders.put("/todos/" + todoSave.getId()).contentType(MediaType.APPLICATION_JSON)
-                .content(todoRequest))
+                .content(todoUpdateRequest))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("status").value(true));
 

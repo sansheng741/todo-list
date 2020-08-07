@@ -2,6 +2,7 @@ package com.oocl.todolist.Controller;
 
 import com.oocl.todolist.Dto.TodoRequest;
 import com.oocl.todolist.Dto.TodoResponse;
+import com.oocl.todolist.Dto.TodoUpdateRequest;
 import com.oocl.todolist.Service.TodoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -35,8 +36,8 @@ public class TodoController {
     }
 
     @PutMapping("/{id}")
-    public TodoResponse updateTodo(@PathVariable("id") Integer id, @RequestBody TodoRequest todoRequest){
-        return todoService.updateTodoStatus(id, todoRequest);
+    public TodoResponse updateTodo(@PathVariable("id") Integer id, @RequestBody TodoUpdateRequest todoUpdateRequest){
+        return todoService.updateTodoStatus(id, todoUpdateRequest);
     }
 
 

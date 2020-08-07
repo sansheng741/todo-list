@@ -2,13 +2,13 @@ package com.oocl.todolist.Service;
 
 import com.oocl.todolist.Dto.TodoRequest;
 import com.oocl.todolist.Dto.TodoResponse;
+import com.oocl.todolist.Dto.TodoUpdateRequest;
 import com.oocl.todolist.Entity.Todo;
 import com.oocl.todolist.Repository.TodoRepository;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -22,10 +22,11 @@ public class TodoService {
     TodoRepository todoRepository;
 
     public Boolean deleteTodo(Integer id) {
+        // todo 先查id抛异常
         try {
             todoRepository.deleteById(id);
             return true;
-        }catch (Exception e){
+        } catch (Exception e) {
             return false;
         }
     }
@@ -33,11 +34,11 @@ public class TodoService {
 
     public TodoResponse addTodo(TodoRequest todoRequest) {
         Todo todo = new Todo();
-        BeanUtils.copyProperties(todoRequest,todo);
+        BeanUtils.copyProperties(todoRequest, todo);
         Todo saveTodo = todoRepository.save(todo);
 
         TodoResponse todoResponse = new TodoResponse();
-        BeanUtils.copyProperties(saveTodo,todoResponse);
+        BeanUtils.copyProperties(saveTodo, todoResponse);
 
         return todoResponse;
     }
@@ -47,10 +48,10 @@ public class TodoService {
         List<Todo> todoList = todoRepository.findAll();
         List<TodoResponse> todoResponseList = todoList.stream().map((todo) -> {
             TodoResponse todoResponse = new TodoResponse();
-            BeanUtils.copyProperties(todo,todoResponse);
+            BeanUtils.copyProperties(todo, todoResponse);
             return todoResponse;
         }).collect(Collectors.toList());
-        return  todoResponseList;
+        return todoResponseList;
     }
 
     public List<TodoResponse> queryFinishList() {
@@ -58,21 +59,21 @@ public class TodoService {
 
         List<TodoResponse> todoResponseList = todoByStatus.stream().map((todo) -> {
             TodoResponse todoResponse = new TodoResponse();
-            BeanUtils.copyProperties(todo,todoResponse);
+            BeanUtils.copyProperties(todo, todoResponse);
             return todoResponse;
         }).collect(Collectors.toList());
-        return  todoResponseList;
+        return todoResponseList;
     }
 
-    public TodoResponse updateTodoStatus(Integer id, TodoRequest todoRequest) {
-        Todo todo = new Todo();
-        todo.setId(id);
-        BeanUtils.copyProperties(todoRequest,todo);
+    public TodoResponse updateTodoStatus(Integer id, TodoUpdateRequest todoUpdateRequest) {
+
+        Todo todo = todoRepository.findById(id).get();
+        todo.setStatus(todoUpdateRequest.isStatus());
 
         Todo saveUpdate = todoRepository.save(todo);
 
         TodoResponse todoResponse = new TodoResponse();
-        BeanUtils.copyProperties(saveUpdate,todoResponse);
+        BeanUtils.copyProperties(saveUpdate, todoResponse);
 
         return todoResponse;
     }
