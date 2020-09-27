@@ -22,7 +22,6 @@ public class TodoService {
     TodoRepository todoRepository;
 
     public Boolean deleteTodo(Integer id) {
-        // todo 先查id抛异常
         try {
             todoRepository.deleteById(id);
             return true;
