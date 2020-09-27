@@ -3,9 +3,6 @@ package com.oocl.todolist.Dto;
 import javax.validation.constraints.NotNull;
 import java.util.Objects;
 
-/**
- * Created by CHENCO9 on 8/6/2020 7:59 PM
- */
 public class TodoRequest {
 
     private String content;
