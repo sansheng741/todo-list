@@ -17,7 +17,7 @@ import java.util.stream.Collectors;
  */
 @Service
 public class TodoService {
-    //test
+
     @Autowired
     TodoRepository todoRepository;
 
@@ -30,7 +30,7 @@ public class TodoService {
         }
     }
 
-    //test1
+
     public TodoResponse addTodo(TodoRequest todoRequest) {
         Todo todo = new Todo();
         BeanUtils.copyProperties(todoRequest, todo);
@@ -42,7 +42,7 @@ public class TodoService {
         return todoResponse;
     }
 
-    //test2
+
     public List<TodoResponse> queryAll() {
         List<Todo> todoList = todoRepository.findAll();
         List<TodoResponse> todoResponseList = todoList.stream().map((todo) -> {
