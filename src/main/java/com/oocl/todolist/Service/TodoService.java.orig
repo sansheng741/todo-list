@@ -20,11 +20,7 @@ public class TodoService {
 
     @Autowired
     TodoRepository todoRepository;
-<<<<<<< HEAD
     //test git extension 1
-=======
-    //test git extension 2
->>>>>>> origin/master
     public Boolean deleteTodo(Integer id) {
         try {
             todoRepository.deleteById(id);
@@ -34,7 +30,7 @@ public class TodoService {
         }
     }
 
-    //add annotation 2
+    //add annotation 1
     public TodoResponse addTodo(TodoRequest todoRequest) {
         Todo todo = new Todo();
         BeanUtils.copyProperties(todoRequest, todo);
@@ -46,7 +42,11 @@ public class TodoService {
         return todoResponse;
     }
 
-
+<<<<<<< HEAD
+    //test 1
+=======
+    //test 2
+>>>>>>> origin/master
     public List<TodoResponse> queryAll() {
         List<Todo> todoList = todoRepository.findAll();
         List<TodoResponse> todoResponseList = todoList.stream().map((todo) -> {
@@ -56,7 +56,11 @@ public class TodoService {
         }).collect(Collectors.toList());
         return todoResponseList;
     }
-
+<<<<<<< HEAD
+    //test 1
+=======
+    //test 2
+>>>>>>> origin/master
     public List<TodoResponse> queryFinishList() {
         List<Todo> todoByStatus = todoRepository.getTodoByStatus(true);
 
