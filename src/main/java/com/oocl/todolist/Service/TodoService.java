@@ -42,7 +42,7 @@ public class TodoService {
         return todoResponse;
     }
 
-
+    //test 1
     public List<TodoResponse> queryAll() {
         List<Todo> todoList = todoRepository.findAll();
         List<TodoResponse> todoResponseList = todoList.stream().map((todo) -> {
@@ -52,7 +52,7 @@ public class TodoService {
         }).collect(Collectors.toList());
         return todoResponseList;
     }
-
+    //test 1
     public List<TodoResponse> queryFinishList() {
         List<Todo> todoByStatus = todoRepository.getTodoByStatus(true);
 
