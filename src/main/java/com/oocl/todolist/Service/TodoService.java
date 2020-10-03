@@ -52,7 +52,7 @@ public class TodoService {
         }).collect(Collectors.toList());
         return todoResponseList;
     }
-    //test 1
+    //test 2
     public List<TodoResponse> queryFinishList() {
         List<Todo> todoByStatus = todoRepository.getTodoByStatus(true);
 
