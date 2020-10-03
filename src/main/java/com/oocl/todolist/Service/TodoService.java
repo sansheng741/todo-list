@@ -21,6 +21,7 @@ public class TodoService {
     @Autowired
     TodoRepository todoRepository;
     //test git extension 2
+    //test pull
     public Boolean deleteTodo(Integer id) {
         try {
             todoRepository.deleteById(id);
