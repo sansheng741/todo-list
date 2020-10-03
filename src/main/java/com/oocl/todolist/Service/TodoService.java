@@ -20,7 +20,7 @@ public class TodoService {
 
     @Autowired
     TodoRepository todoRepository;
-    //test git extension
+    //test git extension 2
     public Boolean deleteTodo(Integer id) {
         try {
             todoRepository.deleteById(id);
@@ -30,7 +30,7 @@ public class TodoService {
         }
     }
 
-    //add annotation 1
+    //add annotation 2
     public TodoResponse addTodo(TodoRequest todoRequest) {
         Todo todo = new Todo();
         BeanUtils.copyProperties(todoRequest, todo);
